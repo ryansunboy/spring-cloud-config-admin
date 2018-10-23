@@ -11,14 +11,14 @@
     <parent>
         <groupId>com.didispace</groupId>
         <artifactId>spring-cloud-config-admin</artifactId>
-        <version>1.2.0-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>com.didispace</groupId>
             <artifactId>scca-core</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- spring boot-->
@@ -59,13 +59,13 @@
         <dependency>
             <groupId>com.didispace</groupId>
             <artifactId>scca-discovery-eureka</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <!--<dependency>-->
             <!--<groupId>com.didispace</groupId>-->
             <!--<artifactId>scca-discovery-consul</artifactId>-->
-            <!--<version>${version}</version>-->
+            <!--<version>${project.version}</version>-->
             <!--<scope>test</scope>-->
         <!--</dependency>-->
 
@@ -73,13 +73,13 @@
         <dependency>
             <groupId>com.didispace</groupId>
             <artifactId>scca-persistence-db</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <!--<dependency>-->
             <!--<groupId>com.didispace</groupId>-->
             <!--<artifactId>scca-persistence-git</artifactId>-->
-            <!--<version>${version}</version>-->
+            <!--<version>${project.version}</version>-->
             <!--<scope>test</scope>-->
         <!--</dependency>-->
 

@@ -16,6 +16,7 @@ import java.util.Properties;
  * <p>
  * Blog: http://blog.didispace.com/
  * Github: https://github.com/dyc87112/
+ * modify by ryansunboy on 2018/10/23 升級支持spring boot2.0.x
  */
 @Slf4j
 public class DbPersistenceService implements PersistenceService {

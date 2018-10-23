@@ -18,6 +18,7 @@ import java.util.List;
  * <p>
  * Blog: http://blog.didispace.com/
  * Github: https://github.com/dyc87112/
+ * modify by ryansunboy on 2018/10/23 升級支持spring boot2.0.x
  */
 @Api("EncryptKey MGT（加密管理）")
 @Slf4j
@@ -54,10 +55,10 @@ public class EncryptKeyController extends BaseController {
     @ApiOperation("Delete EncryptKey / 删除需加密的Key")
     @RequestMapping(method = RequestMethod.DELETE)
     public WebResp<String> deleteEncryptKey(@RequestParam("encryptKeyId") Long encryptKeyId) {
-        EncryptKey encryptKey = encryptKeyRepo.findOne(encryptKeyId);
+        EncryptKey encryptKey = encryptKeyRepo.getOne(encryptKeyId);
 
         log.info("delete EncryptKey : " + encryptKey);
-        encryptKeyRepo.delete(encryptKeyId);
+        encryptKeyRepo.deleteById(encryptKeyId);
 
         return WebResp.success("delete EncryptKey [" + encryptKey.getEKey() + "] success");
     }
@@ -65,7 +66,7 @@ public class EncryptKeyController extends BaseController {
     @ApiOperation("Update EncryptKey / 更新需加密的Key")
     @RequestMapping(method = RequestMethod.PUT)
     public WebResp<String> updateEncryptKey(@RequestBody EncryptKeyDto encryptKey) {
-        EncryptKey updateEncryptKey = encryptKeyRepo.findOne(encryptKey.getId());
+        EncryptKey updateEncryptKey = encryptKeyRepo.getOne(encryptKey.getId());
 
         log.info("Update EncryptKey : " + updateEncryptKey + " --> " + encryptKey);
 
@@ -101,7 +102,7 @@ public class EncryptKeyController extends BaseController {
         log.info("Delete EncryptKeys : " + ids);
 
         for (Long id : ids) {
-            encryptKeyRepo.delete(id);
+            encryptKeyRepo.deleteById(id);
         }
 
         return WebResp.success("batch delete EncryptKeys ：" + ids.size());

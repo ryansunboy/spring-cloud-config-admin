@@ -18,6 +18,7 @@ import java.util.Properties;
  * <p>
  * Blog: http://blog.didispace.com/
  * Github: https://github.com/dyc87112/
+ * modify by ryansunboy on 2018/10/23 升級支持spring boot2.0.x
  */
 @Api("Property MGT（配置详细管理）")
 @Slf4j
@@ -61,7 +62,7 @@ public class PropertyController extends BaseController {
     public WebResp<String> encrypt(@RequestParam("envId") Long envId,
                                    @RequestBody String value) {
         // 指定某个环境的加密（单个值）
-        Env env = envRepo.findOne(envId);
+        Env env = envRepo.getOne(envId);
 
         Assert.notNull(env, "Env [" + envId + "] not exist");
 
@@ -76,7 +77,7 @@ public class PropertyController extends BaseController {
     public WebResp<String> decrypt(@RequestParam("envId") Long envId,
                                    @RequestBody String value) {
         // 指定某个环境的解密（单个值）
-        Env env = envRepo.findOne(envId);
+        Env env = envRepo.getOne(envId);
 
         Assert.notNull(env, "Env [" + envId + "] not exist");
 

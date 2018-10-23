@@ -20,6 +20,7 @@ import java.util.List;
  * <p>
  * Blog: http://blog.didispace.com/
  * Github: https://github.com/dyc87112/
+ *
  */
 @Api("Env MGT（环境管理）")
 @Slf4j
@@ -45,7 +46,7 @@ public class EnvController extends BaseController {
     @RequestMapping(path = "/detail", method = RequestMethod.GET)
     public WebResp<EnvDto> findEnvDetail(@RequestParam("id") Long id) {
 
-        Env env = envRepo.findOne(id);
+        Env env = envRepo.getOne(id);
         EnvDto dto = new EnvDto();
         BeanUtils.copyProperties(env, dto);
 
@@ -77,7 +78,7 @@ public class EnvController extends BaseController {
     @ApiOperation("Delete Env / 删除环境")
     @RequestMapping(method = RequestMethod.DELETE)
     public WebResp<String> deleteEnv(@RequestParam("id") Long id) {
-        Env env = envRepo.findOne(id);
+        Env env = envRepo.getOne(id);
         log.info("delete env. env={}", JSON.toJSONString(env));
 
         // 删除实际持久化内容
@@ -90,7 +91,7 @@ public class EnvController extends BaseController {
         }
 
         // 删除逻辑实体
-        envRepo.delete(id);
+        envRepo.deleteById(id);
 
         return WebResp.success("delete Env success");
     }
@@ -99,7 +100,7 @@ public class EnvController extends BaseController {
     @ApiOperation("Update Env / 更新环境")
     @RequestMapping(method = RequestMethod.PUT)
     public WebResp<String> updateEnv(@RequestBody EnvDto env) {
-        Env u = envRepo.findOne(env.getId());
+        Env u = envRepo.getOne(env.getId());
 
         log.info("update env. u={} env={}", JSON.toJSONString(u), JSON.toJSONString(env));
 

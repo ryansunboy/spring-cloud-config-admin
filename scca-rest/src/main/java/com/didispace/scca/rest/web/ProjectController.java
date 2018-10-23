@@ -23,6 +23,7 @@ import java.util.List;
  * <p>
  * Blog: http://blog.didispace.com/
  * Github: https://github.com/dyc87112/
+ * modify by ryansunboy on 2018/10/23 升級支持spring boot2.0.x
  */
 @Api("Project MGT（项目管理）")
 @Slf4j
@@ -60,7 +61,7 @@ public class ProjectController extends BaseController {
     @RequestMapping(path = "/detail", method = RequestMethod.GET)
     public WebResp<ProjectDto> findProjectDetail(@RequestParam("id") Long id) {
 
-        Project project = projectRepo.findOne(id);
+        Project project = projectRepo.getOne(id);
         ProjectDto dto = new ProjectDto();
         BeanUtils.copyProperties(project, dto);
 
@@ -77,7 +78,7 @@ public class ProjectController extends BaseController {
         BeanUtils.copyProperties(project, saveProject, "envs", "labels");
         // 关联环境（env)
         for (EnvDto envDto : project.getEnvs()) {
-            Env env = envRepo.findOne(envDto.getId());
+            Env env = envRepo.getOne(envDto.getId());
             saveProject.getEnvs().add(env);
         }
         saveProject = projectRepo.save(saveProject);
@@ -95,7 +96,7 @@ public class ProjectController extends BaseController {
     @ApiOperation("Delete Project / 删除项目")
     @RequestMapping(method = RequestMethod.DELETE)
     public WebResp<String> deleteProject(@RequestParam("id") Long id) {
-        Project project = projectRepo.findOne(id);
+        Project project = projectRepo.getOne(id);
         Assert.notNull(project, "Project [" + id + "] not exist");
 
         log.info("delete Project : " + project.getName());
@@ -113,7 +114,7 @@ public class ProjectController extends BaseController {
     @ApiOperation("Update Project / 更新项目")
     @RequestMapping(method = RequestMethod.PUT)
     public WebResp<String> updateProject(@RequestBody ProjectDto project) {
-        Project updateProject = projectRepo.findOne(project.getId());
+        Project updateProject = projectRepo.getOne(project.getId());
         Assert.notNull(updateProject, "Project [" + project.getId() + "] not exist");
 
         // 更新项目名称
@@ -149,7 +150,7 @@ public class ProjectController extends BaseController {
             }
 
             if (add) { // 添加这个环境
-                Env e = envRepo.findOne(envDto.getId());
+                Env e = envRepo.getOne(envDto.getId());
                 addList.add(e);
             }
         }
@@ -172,7 +173,7 @@ public class ProjectController extends BaseController {
     @RequestMapping(path = "/label", method = RequestMethod.POST)
     public WebResp<LabelDto> addProjectLabel(@RequestParam("projectId") Long projectId,
                                              @RequestParam("labelName") String labelName) {
-        Project owner = projectRepo.findOne(projectId);
+        Project owner = projectRepo.getOne(projectId);
         Assert.notNull(owner, "Project [" + projectId + "] not exist");
 
         Label label = new Label();
@@ -191,7 +192,7 @@ public class ProjectController extends BaseController {
     @ApiOperation("Project Delete Label / 项目删除版本")
     @RequestMapping(path = "/label", method = RequestMethod.DELETE)
     public WebResp<String> deleteProjectLabel(@RequestParam("labelId") Long labelId) {
-        Label label = labelRepo.findOne(labelId);
+        Label label = labelRepo.getOne(labelId);
         Assert.notNull(label, "Label [" + labelId + "] not exist");
 
         log.info("delete Label [{}-{}]", label.getProject().getName(), label.getName());
@@ -209,10 +210,10 @@ public class ProjectController extends BaseController {
     @ApiOperation("Project Add Env / 项目增加环境")
     @RequestMapping(path = "/env", method = RequestMethod.POST)
     public WebResp<String> addProjectEnv(@RequestParam("projectId") Long projectId, @RequestParam("envId") Long envId) {
-        Project owner = projectRepo.findOne(projectId);
+        Project owner = projectRepo.getOne(projectId);
         Assert.notNull(owner, "Project [" + projectId + "] not exist");
 
-        Env env = envRepo.findOne(envId);
+        Env env = envRepo.getOne(envId);
         Assert.notNull(env, "Env [" + envId + "] not exist");
 
         owner.getEnvs().add(env);
@@ -225,10 +226,10 @@ public class ProjectController extends BaseController {
     @ApiOperation("Project Remove Env / 项目移除环境")
     @RequestMapping(path = "/env", method = RequestMethod.DELETE)
     public WebResp<String> deleteProjectEnv(@RequestParam("projectId") Long projectId, @RequestParam("envId") Long envId) {
-        Project owner = projectRepo.findOne(projectId);
+        Project owner = projectRepo.getOne(projectId);
         Assert.notNull(owner, "Project [" + projectId + "] not exist");
 
-        Env env = envRepo.findOne(envId);
+        Env env = envRepo.getOne(envId);
         Assert.notNull(env, "Env [" + envId + "] not exist");
 
         owner.getEnvs().remove(env);

@@ -6,20 +6,20 @@
     <groupId>com.didispace</groupId>
     <artifactId>scca-rest-server-db</artifactId>
     <name>scca-rest-server-db</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.14.RELEASE</version>
+        <version>2.0.3.RELEASE</version>
     </parent>
 
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <maven.test.skip>true</maven.test.skip>
         <!--scca version-->
-        <version.scca>1.2.0-SNAPSHOT</version.scca>
+        <version.scca>2.0.0-SNAPSHOT</version.scca>
     </properties>
 
     <dependencies>

@@ -5,7 +5,7 @@
 
     <groupId>com.didispace</groupId>
     <artifactId>scca-ui-rest-server-db</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>scca-ui-rest-server-db</name>
@@ -15,36 +15,34 @@
         <maven.test.skip>true</maven.test.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>1.8</version.java>
-        <!--scca version-->
-        <version.scca>1.2.0-SNAPSHOT</version.scca>
         <!--dependencies version-->
-        <version.spring-boot>1.5.14.RELEASE</version.spring-boot>
-        <version.spring-cloud>Edgware.SR3</version.spring-cloud>
+        <version.spring-boot>2.0.3.RELEASE</version.spring-boot>
+        <version.spring-cloud>Finchley.SR1</version.spring-cloud>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.didispace</groupId>
             <artifactId>scca-ui</artifactId>
-            <version>${version.scca}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.didispace</groupId>
             <artifactId>scca-rest</artifactId>
-            <version>${version.scca}</version>
+            <version>${project.version}</version>
         </dependency>
         <!-- scca discovery dependency-->
         <dependency>
             <groupId>com.didispace</groupId>
             <artifactId>scca-discovery-eureka</artifactId>
-            <version>${version.scca}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- scca persistence dependency -->
         <dependency>
             <groupId>com.didispace</groupId>
             <artifactId>scca-persistence-db</artifactId>
-            <version>${version.scca}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- scca datasource dependency-->
